@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Chloe 💕</title>
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        font-family: 'Trebuchet MS', sans-serif;
+        color: #4a1e2b;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 45px 55px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        z-index: 2;
+        position: relative;
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size: 32px;
+        color: #d6336c;
+    }
+
+    #count {
+        font-size: 55px;
+        margin: 10px 0;
+        transition: transform 0.15s ease;
+    }
+
+    #message {
+        min-height: 24px;
+        font-size: 15px;
+        color: #a3355a;
+        margin-bottom: 15px;
+        font-style: italic;
+    }
+
+    button {
+        background: #d6336c;
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.1s ease, background 0.2s ease;
+    }
+
+    button:hover {
+        background: #f06595;
+        transform: scale(1.05);
+    }
+
+    /* floating hearts in the background */
+    .heart {
+        position: absolute;
+        top: 100%;
+        font-size: 24px;
+        opacity: 0.8;
+        pointer-events: none;
+        animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+        to {
+            transform: translateY(-110vh) rotate(20deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>I Love Chloe 💕</h1>
+    <div id="count">0</div>
+    <div id="message">Click the button and see what happens...</div>
+    <button onclick="loveClick()">I Love Chloe</button>
+</div>
+
+<script>
+    let count = 0;
+
+    // A few sweet messages that show up as you click more
+    const messages = [
+        "Every click is a little bit of love 💗",
+        "You make everything better, Chloe.",
+        "That's a lot of love and counting...",
+        "Still not as many as the times you cross my mind.",
+        "Okay now you're just showing off how loved you are 😄",
+        "This counter could never truly keep up with how much I love you."
+    ];
+
+    function loveClick() {
+        count = count + 1;
+        document.getElementById("count").innerText = count;
+
+        // pop animation
+        const el = document.getElementById("count");
+        el.style.transform = "scale(1.25)";
+        setTimeout(() => { el.style.transform = "scale(1)"; }, 150);
+
+        // update message (cycles through, gets sweeter the more you click)
+        const msgIndex = Math.min(count - 1, messages.length - 1);
+        document.getElementById("message").innerText = messages[msgIndex];
+
+        // spawn a floating heart
+        spawnHeart();
+    }
+
+    function spawnHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (18 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
+
+        // remove it after the animation finishes so the page stays clean
+        setTimeout(() => heart.remove(), 4000);
+    }
+</script>
+
+</body>
+</html>
